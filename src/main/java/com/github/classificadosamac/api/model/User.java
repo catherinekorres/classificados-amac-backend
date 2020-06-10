@@ -8,13 +8,22 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column
     private String name;
+    @Column
     private String email;
+    @Column
     private String password;
+    @Column
     private String phone;
+    @Column
     private String whatsApp;
+    @Column
     private String street;
+    @Column
     private int number;
+
+
 
     public Long getId() {
         return id;

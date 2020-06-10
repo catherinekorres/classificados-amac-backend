@@ -9,7 +9,7 @@ public class Product extends Item {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
+    @Column
     private double price;
 
     public double getPrice() {

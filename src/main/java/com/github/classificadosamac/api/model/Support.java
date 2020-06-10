@@ -8,8 +8,11 @@ public class Support {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column
     private String name;
+    @Column
     private String email;
+    @Column
     private String message;
 
     public Long getId() {

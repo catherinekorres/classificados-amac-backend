@@ -6,7 +6,9 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User seller;
+    @Column
     private String name;
+    @Column
     private String Description;
 
     public User getSeller() {
