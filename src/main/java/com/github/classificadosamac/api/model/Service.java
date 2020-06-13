@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table( name = "services")
 public class Service extends Item {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private String investment;

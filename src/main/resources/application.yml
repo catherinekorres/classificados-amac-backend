@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/classificados_amac?useTimezone=true&serverTimezone=UTC
     username: root
-    password: 8183
+    password:
 
   jpa:
     hibernate:

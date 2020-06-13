@@ -1,12 +1,15 @@
 package com.github.classificadosamac.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private String name;
@@ -23,6 +26,13 @@ public class User {
     @Column
     private int number;
 
+    @OneToMany(mappedBy="seller", cascade=CascadeType.ALL)
+    @JsonIgnoreProperties("seller")
+    private List<Product> products;
+
+    @OneToMany(mappedBy="seller", cascade=CascadeType.ALL)
+    @JsonIgnoreProperties("seller")
+    private List<Service> services;
 
 
     public Long getId() {
@@ -87,5 +97,21 @@ public class User {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
     }
 }
