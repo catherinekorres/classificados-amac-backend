@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -35,4 +34,8 @@ public class ProductController {
         return ResponseEntity.ok(productService.findOne(id));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> productUpdate(@RequestBody Product product, @PathVariable Long id) {
+        return ResponseEntity.ok(productService.update(product, id));
+    }
 }
