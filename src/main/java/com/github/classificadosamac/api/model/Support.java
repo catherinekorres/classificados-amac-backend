@@ -12,7 +12,8 @@ public class Support {
     private String name;
     @Column
     private String email;
-    @Column
+    @Lob
+    @Column(columnDefinition = "text")
     private String message;
 
     public Long getId() {
