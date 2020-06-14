@@ -4,8 +4,9 @@ import com.github.classificadosamac.api.model.Product;
 import com.github.classificadosamac.api.model.Service;
 import com.github.classificadosamac.api.repository.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 @org.springframework.stereotype.Service
 public class ServiceService {
@@ -31,8 +32,8 @@ public class ServiceService {
         return serviceRepository.save(updated);
     }
 
-    public List<Service> findAll() {
-        return serviceRepository.findAll();
+    public Page<Service> findAll(Pageable pageable) {
+        return serviceRepository.findAll(pageable);
     }
 
     public Service findOne(Long id) {

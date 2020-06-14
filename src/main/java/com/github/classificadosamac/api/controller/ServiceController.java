@@ -3,10 +3,10 @@ package com.github.classificadosamac.api.controller;
 import com.github.classificadosamac.api.model.Service;
 import com.github.classificadosamac.api.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/services")
@@ -25,8 +25,14 @@ public class ServiceController {
 
     @CrossOrigin(origins = "*")
     @GetMapping
-    public ResponseEntity<List<Service>> list() {
-        return ResponseEntity.ok(serviceService.findAll());
+    public ResponseEntity<Page<Service>> listHome() {
+        return ResponseEntity.ok(serviceService.findAll(PageRequest.of(0, 4)));
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/page/{number}")
+    public ResponseEntity<Page<Service>> list(@PathVariable int number) {
+        return ResponseEntity.ok(serviceService.findAll(PageRequest.of(number, 16)));
     }
 
     @GetMapping("/{id}")

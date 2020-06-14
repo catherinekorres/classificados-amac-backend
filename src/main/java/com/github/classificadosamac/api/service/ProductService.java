@@ -1,12 +1,11 @@
 package com.github.classificadosamac.api.service;
 
 import com.github.classificadosamac.api.model.Product;
-import com.github.classificadosamac.api.model.User;
 import com.github.classificadosamac.api.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ProductService {
@@ -32,8 +31,8 @@ public class ProductService {
         return productRepository.save(updated);
     }
 
-    public List<Product> findAll() {
-        return productRepository.findAll();
+    public Page<Product> findAll(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 
     public Product findOne(Long id) {
