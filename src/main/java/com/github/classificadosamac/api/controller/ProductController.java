@@ -5,6 +5,7 @@ import com.github.classificadosamac.api.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,13 +27,13 @@ public class ProductController {
     @CrossOrigin(origins = "*")
     @GetMapping
     public ResponseEntity<Page<Product>> listHome() {
-        return ResponseEntity.ok(productService.findAll(PageRequest.of(0, 4)));
+        return ResponseEntity.ok(productService.findAll(PageRequest.of(0, 4, Sort.by("id").descending())));
     }
 
     @CrossOrigin(origins = "*")
     @GetMapping("/page/{number}")
     public ResponseEntity<Page<Product>> list(@PathVariable int number) {
-        return ResponseEntity.ok(productService.findAll(PageRequest.of(number, 16)));
+        return ResponseEntity.ok(productService.findAll(PageRequest.of(number, 16, Sort.by("id").descending())));
     }
 
     @CrossOrigin(origins = "*")
