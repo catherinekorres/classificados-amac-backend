@@ -12,7 +12,8 @@ public class Item {
     private User seller;
     @Column
     private String name;
-    @Column
+    @Lob
+    @Column(columnDefinition = "text")
     private String description;
 
     public User getSeller() {
