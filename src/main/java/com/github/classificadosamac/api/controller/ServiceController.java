@@ -35,6 +35,7 @@ public class ServiceController {
         return ResponseEntity.ok(serviceService.findAll(PageRequest.of(number, 16)));
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/{id}")
     public ResponseEntity<Service> findById(@PathVariable Long id) {
         return ResponseEntity.ok(serviceService.findOne(id));

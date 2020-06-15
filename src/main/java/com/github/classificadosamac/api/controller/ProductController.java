@@ -32,9 +32,10 @@ public class ProductController {
     @CrossOrigin(origins = "*")
     @GetMapping("/page/{number}")
     public ResponseEntity<Page<Product>> list(@PathVariable int number) {
-        return ResponseEntity.ok(productService.findAll(PageRequest.of(number, 24)));
+        return ResponseEntity.ok(productService.findAll(PageRequest.of(number, 16)));
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/{id}")
     public ResponseEntity<Product> findById(@PathVariable Long id) {
         return ResponseEntity.ok(productService.findOne(id));
