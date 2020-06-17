@@ -19,6 +19,7 @@ public class SupportController {
 
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping
     public ResponseEntity<Support> supportSave(@RequestBody Support support){
         return ResponseEntity.ok(supportService.save(support));
