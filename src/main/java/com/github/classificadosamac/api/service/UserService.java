@@ -35,12 +35,14 @@ public class UserService {
         return user.map(UserDTO::new);
     }
 
-    public User update(User user) {
-        Optional<User> optionalUser = userRepository.findById(user.getId());
+    public User update(User user, Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
 
         if (!optionalUser.isPresent()) {
             return null;
         }
+
+        user.setId(id);
 
         return this.save(user);
     }

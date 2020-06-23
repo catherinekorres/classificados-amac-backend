@@ -1,11 +1,14 @@
 package com.github.classificadosamac.api.service;
 
-import com.github.classificadosamac.api.model.Product;
+import com.github.classificadosamac.api.dto.ServiceDTO;
 import com.github.classificadosamac.api.model.Service;
 import com.github.classificadosamac.api.repository.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.Optional;
+import java.util.function.Function;
 
 
 @org.springframework.stereotype.Service
@@ -18,25 +21,47 @@ public class ServiceService {
         this.serviceRepository = serviceRepository;
     }
 
-    public Service save(Service service) {
-        return serviceRepository.save(service);
+    public ServiceDTO save(Service service) {
+        serviceRepository.save(service);
+
+        return new ServiceDTO(serviceRepository.save(service));
     }
 
-    public Service update(Service service, Long id) {
-        Service updated = this.findOne(id);
+    public Page<ServiceDTO> findAll(Pageable pageable) {
+        Page<Service> services = serviceRepository.findAll(pageable);
 
-        updated.setName(service.getName());
-        updated.setDescription(service.getDescription());
-        updated.setInvestment(service.getInvestment());
+        return services.map(new Function<Service, ServiceDTO>() {
+            @Override
+            public ServiceDTO apply(Service service) {
 
-        return serviceRepository.save(updated);
+                return new ServiceDTO(service);
+            }
+        });
     }
 
-    public Page<Service> findAll(Pageable pageable) {
-        return serviceRepository.findAll(pageable);
+    public Optional<ServiceDTO> findOne(Long id) {
+        Optional<Service> service = serviceRepository.findById(id);
+
+        return service.map(ServiceDTO::new);
     }
 
-    public Service findOne(Long id) {
-        return serviceRepository.findById(id).orElse(null);
+    public ServiceDTO update(Service service, Long id) {
+        Optional<Service> optionalService = serviceRepository.findById(id);
+
+        if (!optionalService.isPresent()) {
+            return null;
+        }
+
+        service.setId(id);
+
+        return this.save(service);
+    }
+
+    public void delete(Long id) {
+        Optional<Service> optionalService = serviceRepository.findById(id);
+
+        if (optionalService.isPresent()) {
+            serviceRepository.deleteById(id);
+        }
     }
 }
