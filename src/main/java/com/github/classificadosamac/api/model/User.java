@@ -1,6 +1,7 @@
 package com.github.classificadosamac.api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.github.classificadosamac.api.dto.UserDTO;
 
 import javax.persistence.*;
 import java.util.List;
@@ -114,4 +115,5 @@ public class User {
     public void setServices(List<Service> services) {
         this.services = services;
     }
+
 }

@@ -1,9 +1,14 @@
 package com.github.classificadosamac.api.service;
 
+import com.github.classificadosamac.api.dto.UserDTO;
 import com.github.classificadosamac.api.model.User;
 import com.github.classificadosamac.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -19,21 +24,32 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User update(User user, Long id) {
-        User updated = this.findOne(id);
-
-        updated.setName(user.getName());
-        updated.setEmail(user.getEmail());
-        updated.setPassword(user.getPassword());
-        updated.setPhone(user.getPhone());
-        updated.setWhatsApp(user.getWhatsApp());
-        updated.setStreet(user.getStreet());
-        updated.setNumber(user.getNumber());
-
-        return userRepository.save(updated);
+    public List<UserDTO> findAll() {
+        List<User> users = userRepository.findAll();
+        return users.stream().map(UserDTO::new).collect(Collectors.toList());
     }
 
-    public User findOne(Long id) {
-        return userRepository.findById(id).orElse(null);
+    public Optional<UserDTO> findOne(Long id) {
+        Optional<User> user = userRepository.findById(id);
+
+        return user.map(UserDTO::new);
+    }
+
+    public User update(User user) {
+        Optional<User> optionalUser = userRepository.findById(user.getId());
+
+        if (!optionalUser.isPresent()) {
+            return null;
+        }
+
+        return this.save(user);
+    }
+
+    public void delete(Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if (optionalUser.isPresent()) {
+            userRepository.deleteById(id);
+        }
     }
 }
