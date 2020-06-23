@@ -6,10 +6,7 @@ import com.github.classificadosamac.api.model.Product;
 import com.github.classificadosamac.api.model.Service;
 import com.github.classificadosamac.api.model.User;
 
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
 import java.util.List;
-import java.util.Optional;
 
 public class UserDTO {
 
@@ -32,9 +29,11 @@ public class UserDTO {
     private int number;
 
     @JsonProperty("products")
+    @JsonIgnoreProperties({"seller"})
     private List<Product> products;
 
     @JsonProperty("services")
+    @JsonIgnoreProperties({"seller"})
     private List<Service> services;
 
     public UserDTO() { }
