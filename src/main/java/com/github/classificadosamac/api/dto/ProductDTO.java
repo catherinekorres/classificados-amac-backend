@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.classificadosamac.api.model.Product;
 
 public class ProductDTO {
+    @JsonProperty("id")
+    private Long id;
 
     @JsonProperty("seller")
     @JsonIgnoreProperties({"products", "services"})
@@ -22,6 +24,7 @@ public class ProductDTO {
     public ProductDTO() { }
 
     public ProductDTO(Product product) {
+        this.id = product.getId();
         this.seller = new UserDTO(product.getSeller());
         this.name = product.getName();
         this.description = product.getDescription();

@@ -9,6 +9,8 @@ import com.github.classificadosamac.api.model.User;
 import java.util.List;
 
 public class UserDTO {
+    @JsonProperty("id")
+    private Long id;
 
     @JsonProperty("name")
     private String name;
@@ -39,6 +41,7 @@ public class UserDTO {
     public UserDTO() { }
 
     public UserDTO(User user) {
+        this.id = user.getId();
         this.name = user.getName();
         this.email = user.getEmail();
         this.phone = user.getPhone();
