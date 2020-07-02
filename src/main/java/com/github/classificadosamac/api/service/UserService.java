@@ -24,9 +24,8 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public List<UserDTO> findAll() {
-        List<User> users = userRepository.findAll();
-        return users.stream().map(UserDTO::new).collect(Collectors.toList());
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 
     public Optional<UserDTO> findOne(Long id) {
