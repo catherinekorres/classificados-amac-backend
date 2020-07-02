@@ -12,7 +12,6 @@ public class Support {
     private String name;
     @Column
     private String email;
-    @Lob
     @Column(columnDefinition = "text")
     private String message;
 
