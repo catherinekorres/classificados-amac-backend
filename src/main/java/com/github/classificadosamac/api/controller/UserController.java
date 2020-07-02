@@ -20,14 +20,16 @@ public class UserController {
         this.userService = userService;
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping
     public ResponseEntity<User> save(@RequestBody User user) {
         return ResponseEntity.ok(userService.save(user));
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping
     @ResponseBody
-    public List<UserDTO> list() {
+    public List<User> list() {
         return userService.findAll();
     }
 

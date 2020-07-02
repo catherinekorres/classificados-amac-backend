@@ -22,6 +22,7 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping
     public ResponseEntity<ProductDTO> productSave(@RequestBody Product product) {
         return ResponseEntity.ok(productService.save(product));
@@ -50,6 +51,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.update(product, id));
     }
 
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         productService.delete(id);
